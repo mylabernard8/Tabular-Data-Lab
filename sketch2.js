@@ -1,4 +1,4 @@
-const weatherURL = "https://raw.githubusercontent.com/fivethirtyeight/data/refs/heads/master/us-weather-history/KNYC.csv";
+const weatherURL = "https://raw.githubusercontent.com/fivethirtyeight/data/master/us-weather-history/KNYC.csv";
 let weatherTable;
 let currentSubset = "January";
 
@@ -13,8 +13,8 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(800, 400); 
-  noLoop(); 
+  createCanvas(800, 400);
+  noLoop();
 }
 
 function draw() {
@@ -62,4 +62,14 @@ function extractAndScaleData() {
     scaledPoints.push({ x, y });
   }
   return scaledPoints;
+}
+
+function keyPressed() {
+  if (keyCode === RIGHT_ARROW) {
+    // Cycle through subsets
+    let keys = Object.keys(subsets);
+    let currentIndex = keys.indexOf(currentSubset);
+    currentSubset = keys[(currentIndex + 1) % keys.length];
+    redraw(); // Redraw the graph
+  }
 }
